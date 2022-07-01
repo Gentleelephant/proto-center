@@ -1,5 +1,8 @@
 .PHONY: build check
 
+build:
+	@go build main.go
+
 generate-go:
 
 check:
