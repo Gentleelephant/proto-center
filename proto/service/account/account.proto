@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package account;
-option go_package = "./pb/model;account";
+option go_package = "./pb/model;pb";
 
 
 service AccountService {
