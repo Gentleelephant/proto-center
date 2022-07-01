@@ -4,7 +4,7 @@
 // - protoc             v3.19.3
 // source: account/account.proto
 
-package pb
+package account
 
 import (
 	context "context"
