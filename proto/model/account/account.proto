@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package account;
-option go_package = "./pb/account;pb";
-
-message AddRequest{
-  int32 a = 1;
-  int32 b = 2;
-}
