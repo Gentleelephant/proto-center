@@ -64,7 +64,7 @@ func NewProductServiceClient(cc grpc.ClientConnInterface) ProductServiceClient {
 
 func (c *productServiceClient) ProductList(ctx context.Context, in *ProductConditionReq, opts ...grpc.CallOption) (*ProductRes, error) {
 	out := new(ProductRes)
-	err := c.cc.Invoke(ctx, "/ProductService/ProductList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/ProductList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ func (c *productServiceClient) ProductList(ctx context.Context, in *ProductCondi
 
 func (c *productServiceClient) BatchGetProduct(ctx context.Context, in *BatchProductIdReq, opts ...grpc.CallOption) (*ProductRes, error) {
 	out := new(ProductRes)
-	err := c.cc.Invoke(ctx, "/ProductService/BatchGetProduct", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/BatchGetProduct", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ func (c *productServiceClient) BatchGetProduct(ctx context.Context, in *BatchPro
 
 func (c *productServiceClient) CreateProduct(ctx context.Context, in *CreateProductItem, opts ...grpc.CallOption) (*ProductItemRes, error) {
 	out := new(ProductItemRes)
-	err := c.cc.Invoke(ctx, "/ProductService/CreateProduct", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/CreateProduct", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ func (c *productServiceClient) CreateProduct(ctx context.Context, in *CreateProd
 
 func (c *productServiceClient) DeleteProduct(ctx context.Context, in *DeleteProductItem, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/ProductService/DeleteProduct", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/DeleteProduct", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ func (c *productServiceClient) DeleteProduct(ctx context.Context, in *DeleteProd
 
 func (c *productServiceClient) UpdateProduct(ctx context.Context, in *CreateProductItem, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/ProductService/UpdateProduct", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/UpdateProduct", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ func (c *productServiceClient) UpdateProduct(ctx context.Context, in *CreateProd
 
 func (c *productServiceClient) GetProductDetail(ctx context.Context, in *ProductItemReq, opts ...grpc.CallOption) (*ProductItemRes, error) {
 	out := new(ProductItemRes)
-	err := c.cc.Invoke(ctx, "/ProductService/GetProductDetail", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/GetProductDetail", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -118,7 +118,7 @@ func (c *productServiceClient) GetProductDetail(ctx context.Context, in *Product
 
 func (c *productServiceClient) GetAllCategoryList(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*CategoriesRes, error) {
 	out := new(CategoriesRes)
-	err := c.cc.Invoke(ctx, "/ProductService/GetAllCategoryList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/GetAllCategoryList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -127,7 +127,7 @@ func (c *productServiceClient) GetAllCategoryList(ctx context.Context, in *empty
 
 func (c *productServiceClient) GetSubCategory(ctx context.Context, in *CategoriesReq, opts ...grpc.CallOption) (*SubCategoriesRes, error) {
 	out := new(SubCategoriesRes)
-	err := c.cc.Invoke(ctx, "/ProductService/GetSubCategory", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/GetSubCategory", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -136,7 +136,7 @@ func (c *productServiceClient) GetSubCategory(ctx context.Context, in *Categorie
 
 func (c *productServiceClient) CreateCategory(ctx context.Context, in *CategoryItemReq, opts ...grpc.CallOption) (*CategoryItemRes, error) {
 	out := new(CategoryItemRes)
-	err := c.cc.Invoke(ctx, "/ProductService/CreateCategory", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/CreateCategory", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -145,7 +145,7 @@ func (c *productServiceClient) CreateCategory(ctx context.Context, in *CategoryI
 
 func (c *productServiceClient) DeleteCategory(ctx context.Context, in *CategoryItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/ProductService/DeleteCategory", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/DeleteCategory", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -154,7 +154,7 @@ func (c *productServiceClient) DeleteCategory(ctx context.Context, in *CategoryI
 
 func (c *productServiceClient) UpdateCategory(ctx context.Context, in *CategoryItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/ProductService/UpdateCategory", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/UpdateCategory", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -163,7 +163,7 @@ func (c *productServiceClient) UpdateCategory(ctx context.Context, in *CategoryI
 
 func (c *productServiceClient) BrandList(ctx context.Context, in *BrandPagingReq, opts ...grpc.CallOption) (*BrandRes, error) {
 	out := new(BrandRes)
-	err := c.cc.Invoke(ctx, "/ProductService/BrandList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/BrandList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -172,7 +172,7 @@ func (c *productServiceClient) BrandList(ctx context.Context, in *BrandPagingReq
 
 func (c *productServiceClient) CreateBrand(ctx context.Context, in *BrandItemReq, opts ...grpc.CallOption) (*BrandItemRes, error) {
 	out := new(BrandItemRes)
-	err := c.cc.Invoke(ctx, "/ProductService/CreateBrand", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/CreateBrand", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -181,7 +181,7 @@ func (c *productServiceClient) CreateBrand(ctx context.Context, in *BrandItemReq
 
 func (c *productServiceClient) DeleteBrand(ctx context.Context, in *BrandItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/ProductService/DeleteBrand", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/DeleteBrand", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -190,7 +190,7 @@ func (c *productServiceClient) DeleteBrand(ctx context.Context, in *BrandItemReq
 
 func (c *productServiceClient) UpdateBrand(ctx context.Context, in *BrandItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/ProductService/UpdateBrand", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/UpdateBrand", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -199,7 +199,7 @@ func (c *productServiceClient) UpdateBrand(ctx context.Context, in *BrandItemReq
 
 func (c *productServiceClient) AdvertiseList(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*AdvertisingRes, error) {
 	out := new(AdvertisingRes)
-	err := c.cc.Invoke(ctx, "/ProductService/AdvertiseList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/AdvertiseList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -208,7 +208,7 @@ func (c *productServiceClient) AdvertiseList(ctx context.Context, in *emptypb.Em
 
 func (c *productServiceClient) CreateAdvertise(ctx context.Context, in *AdvertiseReq, opts ...grpc.CallOption) (*AdvertiseItemRes, error) {
 	out := new(AdvertiseItemRes)
-	err := c.cc.Invoke(ctx, "/ProductService/CreateAdvertise", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/CreateAdvertise", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -217,7 +217,7 @@ func (c *productServiceClient) CreateAdvertise(ctx context.Context, in *Advertis
 
 func (c *productServiceClient) DeleteAdvertise(ctx context.Context, in *AdvertiseReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/ProductService/DeleteAdvertise", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/DeleteAdvertise", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -226,7 +226,7 @@ func (c *productServiceClient) DeleteAdvertise(ctx context.Context, in *Advertis
 
 func (c *productServiceClient) UpdateAdvertise(ctx context.Context, in *AdvertiseReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/ProductService/UpdateAdvertise", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/UpdateAdvertise", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -235,7 +235,7 @@ func (c *productServiceClient) UpdateAdvertise(ctx context.Context, in *Advertis
 
 func (c *productServiceClient) CategoryBrandList(ctx context.Context, in *PagingReq, opts ...grpc.CallOption) (*CategoryBrandListRes, error) {
 	out := new(CategoryBrandListRes)
-	err := c.cc.Invoke(ctx, "/ProductService/CategoryBrandList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/CategoryBrandList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -244,7 +244,7 @@ func (c *productServiceClient) CategoryBrandList(ctx context.Context, in *Paging
 
 func (c *productServiceClient) GetCategoryBrandList(ctx context.Context, in *CategoryItemReq, opts ...grpc.CallOption) (*BrandItemRes, error) {
 	out := new(BrandItemRes)
-	err := c.cc.Invoke(ctx, "/ProductService/GetCategoryBrandList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/GetCategoryBrandList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -253,7 +253,7 @@ func (c *productServiceClient) GetCategoryBrandList(ctx context.Context, in *Cat
 
 func (c *productServiceClient) CreateCategoryBrand(ctx context.Context, in *CategoryBrandItemReq, opts ...grpc.CallOption) (*CategoryBrandRes, error) {
 	out := new(CategoryBrandRes)
-	err := c.cc.Invoke(ctx, "/ProductService/CreateCategoryBrand", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/CreateCategoryBrand", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -262,7 +262,7 @@ func (c *productServiceClient) CreateCategoryBrand(ctx context.Context, in *Cate
 
 func (c *productServiceClient) DeleteCategoryBrand(ctx context.Context, in *CategoryBrandItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/ProductService/DeleteCategoryBrand", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/DeleteCategoryBrand", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -271,7 +271,7 @@ func (c *productServiceClient) DeleteCategoryBrand(ctx context.Context, in *Cate
 
 func (c *productServiceClient) UpdateCategoryBrand(ctx context.Context, in *CategoryBrandItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/ProductService/UpdateCategoryBrand", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/UpdateCategoryBrand", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -413,7 +413,7 @@ func _ProductService_ProductList_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/ProductList",
+		FullMethod: "/product.ProductService/ProductList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).ProductList(ctx, req.(*ProductConditionReq))
@@ -431,7 +431,7 @@ func _ProductService_BatchGetProduct_Handler(srv interface{}, ctx context.Contex
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/BatchGetProduct",
+		FullMethod: "/product.ProductService/BatchGetProduct",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).BatchGetProduct(ctx, req.(*BatchProductIdReq))
@@ -449,7 +449,7 @@ func _ProductService_CreateProduct_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/CreateProduct",
+		FullMethod: "/product.ProductService/CreateProduct",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).CreateProduct(ctx, req.(*CreateProductItem))
@@ -467,7 +467,7 @@ func _ProductService_DeleteProduct_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/DeleteProduct",
+		FullMethod: "/product.ProductService/DeleteProduct",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).DeleteProduct(ctx, req.(*DeleteProductItem))
@@ -485,7 +485,7 @@ func _ProductService_UpdateProduct_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/UpdateProduct",
+		FullMethod: "/product.ProductService/UpdateProduct",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).UpdateProduct(ctx, req.(*CreateProductItem))
@@ -503,7 +503,7 @@ func _ProductService_GetProductDetail_Handler(srv interface{}, ctx context.Conte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/GetProductDetail",
+		FullMethod: "/product.ProductService/GetProductDetail",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).GetProductDetail(ctx, req.(*ProductItemReq))
@@ -521,7 +521,7 @@ func _ProductService_GetAllCategoryList_Handler(srv interface{}, ctx context.Con
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/GetAllCategoryList",
+		FullMethod: "/product.ProductService/GetAllCategoryList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).GetAllCategoryList(ctx, req.(*emptypb.Empty))
@@ -539,7 +539,7 @@ func _ProductService_GetSubCategory_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/GetSubCategory",
+		FullMethod: "/product.ProductService/GetSubCategory",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).GetSubCategory(ctx, req.(*CategoriesReq))
@@ -557,7 +557,7 @@ func _ProductService_CreateCategory_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/CreateCategory",
+		FullMethod: "/product.ProductService/CreateCategory",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).CreateCategory(ctx, req.(*CategoryItemReq))
@@ -575,7 +575,7 @@ func _ProductService_DeleteCategory_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/DeleteCategory",
+		FullMethod: "/product.ProductService/DeleteCategory",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).DeleteCategory(ctx, req.(*CategoryItemReq))
@@ -593,7 +593,7 @@ func _ProductService_UpdateCategory_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/UpdateCategory",
+		FullMethod: "/product.ProductService/UpdateCategory",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).UpdateCategory(ctx, req.(*CategoryItemReq))
@@ -611,7 +611,7 @@ func _ProductService_BrandList_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/BrandList",
+		FullMethod: "/product.ProductService/BrandList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).BrandList(ctx, req.(*BrandPagingReq))
@@ -629,7 +629,7 @@ func _ProductService_CreateBrand_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/CreateBrand",
+		FullMethod: "/product.ProductService/CreateBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).CreateBrand(ctx, req.(*BrandItemReq))
@@ -647,7 +647,7 @@ func _ProductService_DeleteBrand_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/DeleteBrand",
+		FullMethod: "/product.ProductService/DeleteBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).DeleteBrand(ctx, req.(*BrandItemReq))
@@ -665,7 +665,7 @@ func _ProductService_UpdateBrand_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/UpdateBrand",
+		FullMethod: "/product.ProductService/UpdateBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).UpdateBrand(ctx, req.(*BrandItemReq))
@@ -683,7 +683,7 @@ func _ProductService_AdvertiseList_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/AdvertiseList",
+		FullMethod: "/product.ProductService/AdvertiseList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).AdvertiseList(ctx, req.(*emptypb.Empty))
@@ -701,7 +701,7 @@ func _ProductService_CreateAdvertise_Handler(srv interface{}, ctx context.Contex
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/CreateAdvertise",
+		FullMethod: "/product.ProductService/CreateAdvertise",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).CreateAdvertise(ctx, req.(*AdvertiseReq))
@@ -719,7 +719,7 @@ func _ProductService_DeleteAdvertise_Handler(srv interface{}, ctx context.Contex
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/DeleteAdvertise",
+		FullMethod: "/product.ProductService/DeleteAdvertise",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).DeleteAdvertise(ctx, req.(*AdvertiseReq))
@@ -737,7 +737,7 @@ func _ProductService_UpdateAdvertise_Handler(srv interface{}, ctx context.Contex
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/UpdateAdvertise",
+		FullMethod: "/product.ProductService/UpdateAdvertise",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).UpdateAdvertise(ctx, req.(*AdvertiseReq))
@@ -755,7 +755,7 @@ func _ProductService_CategoryBrandList_Handler(srv interface{}, ctx context.Cont
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/CategoryBrandList",
+		FullMethod: "/product.ProductService/CategoryBrandList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).CategoryBrandList(ctx, req.(*PagingReq))
@@ -773,7 +773,7 @@ func _ProductService_GetCategoryBrandList_Handler(srv interface{}, ctx context.C
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/GetCategoryBrandList",
+		FullMethod: "/product.ProductService/GetCategoryBrandList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).GetCategoryBrandList(ctx, req.(*CategoryItemReq))
@@ -791,7 +791,7 @@ func _ProductService_CreateCategoryBrand_Handler(srv interface{}, ctx context.Co
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/CreateCategoryBrand",
+		FullMethod: "/product.ProductService/CreateCategoryBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).CreateCategoryBrand(ctx, req.(*CategoryBrandItemReq))
@@ -809,7 +809,7 @@ func _ProductService_DeleteCategoryBrand_Handler(srv interface{}, ctx context.Co
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/DeleteCategoryBrand",
+		FullMethod: "/product.ProductService/DeleteCategoryBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).DeleteCategoryBrand(ctx, req.(*CategoryBrandItemReq))
@@ -827,7 +827,7 @@ func _ProductService_UpdateCategoryBrand_Handler(srv interface{}, ctx context.Co
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProductService/UpdateCategoryBrand",
+		FullMethod: "/product.ProductService/UpdateCategoryBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).UpdateCategoryBrand(ctx, req.(*CategoryBrandItemReq))
@@ -839,7 +839,7 @@ func _ProductService_UpdateCategoryBrand_Handler(srv interface{}, ctx context.Co
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "ProductService",
+	ServiceName: "product.ProductService",
 	HandlerType: (*ProductServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
