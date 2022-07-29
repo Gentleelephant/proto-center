@@ -1,9 +1,10 @@
 .PHONY: build check
 
 build:
-	@go build main.go
+	@echo "use [make generate-go]: generate code for go"
+	@echo "use [make check]: code review for go"
 
 generate-go:
-
+	@buf generate
 check:
 	@go langci-lint run
