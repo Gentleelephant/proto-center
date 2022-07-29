@@ -2,9 +2,10 @@
 
 build:
 	@echo "use [make generate-go]: generate code for go"
-	@echo "use [make check]: code review for go"
+	@echo "use [make push]: push code to buf.build"
 
 generate-go:
 	@buf generate
-check:
-	@go langci-lint run
+push:
+	@cd ./proto/service/account && buf push
+	@cd ./proto/service/product && buf push
