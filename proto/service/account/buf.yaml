@@ -1,0 +1,8 @@
+version: v1
+name: buf.build/birdhk/account
+breaking:
+  use:
+    - FILE
+lint:
+  use:
+    - DEFAULT

@@ -1,3 +1,7 @@
-### proto命令
-**根目录下执行一下命令，创建account相关服务**
-protoc --proto_path=./proto/service --go_out=. --go-grpc_out=. account/account.proto
+# buf命令
+
+buf mod init 创建模块
+
+buf mod update 更新模块
+
+buf generate 创建文件
