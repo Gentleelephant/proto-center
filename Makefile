@@ -1,4 +1,4 @@
-.PHONY: build check
+.PHONY: build generate-go push
 
 build:
 	@echo "use [make generate-go]: generate code for go"
