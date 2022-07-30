@@ -1,10 +1,10 @@
-.PHONY: build generate-go push
+.PHONY: build push
 
-build:
+help:
 	@echo "use [make generate-go]: generate code for go"
 	@echo "use [make push]: push code to buf.build"
 
-generate-go:
+build:
 	@buf generate
 push:
 	@cd ./proto/service/account && buf push
