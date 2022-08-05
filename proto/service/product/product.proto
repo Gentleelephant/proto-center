@@ -6,130 +6,183 @@ option go_package="./service/product;pb";
 
 service ProductService {
   // 产品
-  rpc ProductList(ProductConditionReq) returns (ProductRes);
-  rpc BatchGetProduct(BatchProductIdReq) returns (ProductRes);
-  rpc CreateProduct(CreateProductItem) returns (ProductItemRes);
+  rpc ProductList(ProductConditionRequest) returns (ProductResponse);
+  rpc BatchGetProduct(BatchProductIdRequest) returns (ProductResponse);
+  rpc CreateProduct(CreateProductItem) returns (ProductItemResponse);
   rpc DeleteProduct(DeleteProductItem) returns (google.protobuf.Empty);
   rpc UpdateProduct(CreateProductItem) returns (google.protobuf.Empty);
-  rpc GetProductDetail(ProductItemReq) returns (ProductItemRes);
+  rpc GetProductDetail(ProductItemRequest) returns (ProductItemResponse);
 
   // 产品分类
-  rpc GetAllCategoryList(google.protobuf.Empty) returns (CategoriesRes);
-  rpc GetSubCategory(CategoriesReq) returns (SubCategoriesRes);
-  rpc CreateCategory(CategoryItemReq) returns (CategoryItemRes);
-  rpc DeleteCategory(CategoryItemReq) returns (google.protobuf.Empty);
-  rpc UpdateCategory(CategoryItemReq) returns (google.protobuf.Empty);
+  rpc GetAllCategoryList(google.protobuf.Empty) returns (CategoriesResponse);
+  rpc GetSubCategory(CategoriesRequest) returns (SubCategoriesResponse);
+  rpc CreateCategory(CategoryItemRequest) returns (CategoryItemRes);
+  rpc DeleteCategory(CategoryItemRequest) returns (google.protobuf.Empty);
+  rpc UpdateCategory(CategoryItemRequest) returns (google.protobuf.Empty);
 
   // 品牌相关
-  rpc BrandList(BrandPagingReq) returns (BrandRes);
-  rpc CreateBrand(BrandItemReq) returns (BrandItemRes);
-  rpc DeleteBrand(BrandItemReq) returns (google.protobuf.Empty);
-  rpc UpdateBrand(BrandItemReq) returns (google.protobuf.Empty);
+  rpc BrandList(BrandPagingRequest) returns (BrandResponse);
+  rpc CreateBrand(BrandItemRequest) returns (BrandItemResponse);
+  rpc DeleteBrand(BrandItemRequest) returns (google.protobuf.Empty);
+  rpc UpdateBrand(BrandItemRequest) returns (google.protobuf.Empty);
 
   // 广告相关
-  rpc AdvertiseList(google.protobuf.Empty) returns (AdvertisingRes);
-  rpc CreateAdvertise(AdvertiseReq) returns (AdvertiseItemRes);
-  rpc DeleteAdvertise(AdvertiseReq) returns (google.protobuf.Empty);
-  rpc UpdateAdvertise(AdvertiseReq) returns (google.protobuf.Empty);
+  rpc AdvertiseList(google.protobuf.Empty) returns (AdvertisingResponse);
+  rpc CreateAdvertise(AdvertiseRequest) returns (AdvertiseItemResponse);
+  rpc DeleteAdvertise(AdvertiseRequest) returns (google.protobuf.Empty);
+  rpc UpdateAdvertise(AdvertiseRequest) returns (google.protobuf.Empty);
 
   // 品牌分类中间表
   rpc CategoryBrandList(PagingReq) returns (CategoryBrandListRes);
-  rpc GetCategoryBrandList(CategoryItemReq) returns (BrandItemRes);
-  rpc CreateCategoryBrand(CategoryBrandItemReq) returns (CategoryBrandRes);
-  rpc DeleteCategoryBrand(CategoryBrandItemReq) returns (google.protobuf.Empty);
-  rpc UpdateCategoryBrand(CategoryBrandItemReq) returns (google.protobuf.Empty);
+  rpc GetCategoryBrandList(CategoryItemRequest) returns (BrandItemResponse);
+  rpc CreateCategoryBrand(CategoryBrandItemRequest) returns (CategoryBrandResponse);
+  rpc DeleteCategoryBrand(CategoryBrandItemRequest) returns (google.protobuf.Empty);
+  rpc UpdateCategoryBrand(CategoryBrandItemRequest) returns (google.protobuf.Empty);
 }
 
-message CategoryBrandItemReq {
+message CategoryBrandItemRequest {
+  // @inject_tag: json:"categoryId"
   int32 id = 1;
-  BrandItemRes brand = 2;
+  // @inject_tag: json:"brand"
+  BrandItemResponse brand = 2;
+
+  // @inject_tag: json:"category"
   CategoryItemRes category = 3;
 }
 
-message CategoryBrandRes{
+message CategoryBrandResponse{
+  // @inject_tag: json:"categoryId"
   int32 id = 1;
-  BrandItemRes brand = 2;
+  // @inject_tag: json:"brand"
+  BrandItemResponse brand = 2;
+
+  // @inject_tag: json:"category"
   CategoryItemRes category = 3;
 }
 
 message CategoryBrandListRes {
+  // @inject_tag: json:"total"
   int32 total = 1;
-  repeated CategoryBrandRes itemList = 2;
+
+  // @inject_tag: json:"list"
+  repeated CategoryBrandResponse itemList = 2;
 }
 
 message PagingReq {
+
+  // @inject_tag: json:"pageNo"
   int32 pageNo = 1;
+  // @inject_tag: json:"pageSize"
   int32 pageSize = 2;
 }
 
-message AdvertiseReq {
+message AdvertiseRequest {
+  // @inject_tag: json:"id"
   int32 id = 1;
+  // @inject_tag: json:"index"
   int32 index = 2;
+  // @inject_tag: json:"image"
   string image = 3;
+  // @inject_tag: json:"url"
   string url = 4;
 }
 
-message AdvertisingRes {
+message AdvertisingResponse {
+  // @inject_tag: json:"total"
   int32 total = 1;
-  repeated AdvertiseItemRes items = 2;
+
+  // @inject_tag: json:"item"
+  repeated AdvertiseItemResponse items = 2;
 }
 
-message AdvertiseItemRes {
+message AdvertiseItemResponse {
+  // @inject_tag: json:"id"
   int32 id = 1;
+  // @inject_tag: json:"index"
   int32 index = 2;
+  // @inject_tag: json:"image"
   string image = 3;
+  // @inject_tag: json:"url"
   string url = 4;
 }
 
-message BrandItemReq {
+message BrandItemRequest {
+  // @inject_tag: json:"id"
   int32 id = 1;
+  // @inject_tag: json:"name"
   string name = 2;
+  // @inject_tag: json:"logo"
   string logo = 3;
 }
 
-message BrandPagingReq {
+message BrandPagingRequest {
+  // @inject_tag: json:"pageNo"
   int32 pageNo = 1;
+  // @inject_tag: json:"pageSize"
   int32 pageSize = 2;
 }
 
-message BrandRes {
+message BrandResponse {
+  // @inject_tag: json:"total"
   int32 total = 1;
-  repeated BrandItemRes itemList = 2;
+
+  // @inject_tag: json:"item"
+  repeated BrandItemResponse itemList = 2;
 }
 
 
-message BrandItemRes {
+message BrandItemResponse {
+  // @inject_tag: json:"id"
   int32 id = 1;
+  // @inject_tag: json:"name"
   string name = 2;
+  // @inject_tag: json:"logo"
   string logo = 3;
 //  string description = 4;
 //  string createTime = 5;
 //  string updateTime = 6;
 }
 
-message CategoryItemReq {
+message CategoryItemRequest {
+  // @inject_tag: json:"id"
   int32 id = 1;
 }
 
-message SubCategoriesRes {
+message SubCategoriesResponse {
+  // @inject_tag: json:"total"
   int32 total = 1;
-  CategoriesRes info = 2;
+
+  // @inject_tag: json:"info"
+  CategoriesResponse info = 2;
+
+  // @inject_tag: json:"list"
   repeated CategoryItemRes subCategoryList = 3;
+
+  // @inject_tag: json:"jsonFormat"
   string categoryJsonFormat = 4;
 }
 
-message CategoriesReq {
+message CategoriesRequest {
+  // @inject_tag: json:"id"
   int32 id = 1;
+
+  // @inject_tag: json:"level"
   int32 level = 2;
 }
 
-message CategoriesRes {
+message CategoriesResponse {
+  // @inject_tag: json:"total"
   int32 total = 1;
+
+  // @inject_tag: json:"info"
   repeated CategoryItemRes infoResList = 2;
+
+  // @inject_tag: json:"jsonFormat"
   string categoryJsonFormat = 3;
 }
 
 message CategoryItemRes {
+
   int32 id = 1;
   string name = 2;
   int32 parentCategoryId = 3;
@@ -141,52 +194,81 @@ message CategoryItemRes {
 //  string updateTime = 9;
 }
 
-message ProductItemReq {
+message ProductItemRequest {
+  // @inject_tag: json:"id"
   string id = 1;
 }
 
 message DeleteProductItem {
+  // @inject_tag: json:"id"
   string id = 1;
 }
 
 message CreateProductItem {
+  // @inject_tag: json:"id"
   int32 id = 1;
+  // @inject_tag: json:"name"
   string name = 2;
+  // @inject_tag: json:"sn"
   string sn = 3;
+  // @inject_tag: json:"stock"
   int32 stock = 4;
+  // @inject_tag: json:"price"
   float price = 5;
+  // @inject_tag: json:"realPrice"
   float realPrice = 6;
+  // @inject_tag: json:"shortDesc"
   string shortDesc = 7;
+  // @inject_tag: json:"desc"
   string desc = 8;
+  // @inject_tag: json:"image"
   repeated string images = 9;
+  // @inject_tag: json:"descImages"
   repeated string descImages = 10;
+  // @inject_tag: json:"coverImage"
   string coverImage = 11;
+  // @inject_tag: json:"isNew"
   bool isNew = 12;
+  // @inject_tag: json:"isPop"
   bool isPop = 13;
+  // @inject_tag: json:"selling"
   bool selling = 14;
+  // @inject_tag: json:"brandId"
   int32 brandId = 15;
+  // @inject_tag: json:"favNum"
   int32 favNum = 16;
+  // @inject_tag: json:"soldNum"
   int32 soldNum = 17;
 }
 
-message BatchProductIdReq {
+message BatchProductIdRequest {
+  // @inject_tag: json:"ids"
   repeated string ids = 1;
 }
 
 
-message ProductConditionReq {
+message ProductConditionRequest {
+  // @inject_tag: json:"minPrice"
   string minPrice = 1;
+  // @inject_tag: json:"maxPrice"
   int32 maxPrice = 2;
+  // @inject_tag: json:"isPop"
   bool isPop  = 3;
+  // @inject_tag: json:"isNew"
   bool isNew = 4;
+  // @inject_tag: json:"categoryId"
   int32 categoryId = 5;
+  // @inject_tag: json:"pageNo"
   int32 pageNo = 6;
+  // @inject_tag: json:"pageSize"
   int32 pageSize = 7;
+  // @inject_tag: json:"keyWord"
   string keyWord = 8;
+  // @inject_tag: json:"brandId"
   int32 brandId = 9;
 }
 
-message ProductItemRes{
+message ProductItemResponse {
   int32 id = 1;
   int32  categoryId = 2;
   string name = 3;
@@ -207,10 +289,13 @@ message ProductItemRes{
   bool selling = 17;
   int64 addTime = 18;
 //  CategoryShortItemRes category = 19;
-  BrandItemRes brand = 20;
+  BrandItemResponse brand = 20;
 }
 
-message ProductRes {
+message ProductResponse {
+  // @inject_tag: json:"total"
   int32 total = 1;
-  repeated ProductItemRes itemList = 2;
+
+  // @inject_tag: json:"list"
+  repeated ProductItemResponse itemList = 2;
 }

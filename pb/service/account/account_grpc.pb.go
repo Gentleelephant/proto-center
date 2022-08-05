@@ -22,11 +22,11 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AccountServiceClient interface {
-	GetAccountList(ctx context.Context, in *AccountPagingRequest, opts ...grpc.CallOption) (*AccountListRes, error)
-	GetAccountByMobile(ctx context.Context, in *MobileRequest, opts ...grpc.CallOption) (*AccountRes, error)
-	GetAccountByID(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*AccountRes, error)
-	AddAccount(ctx context.Context, in *AddAccountRequest, opts ...grpc.CallOption) (*AccountRes, error)
-	UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*AccountRes, error)
+	GetAccountList(ctx context.Context, in *AccountPagingRequest, opts ...grpc.CallOption) (*AccountListResponse, error)
+	GetAccountByMobile(ctx context.Context, in *MobileRequest, opts ...grpc.CallOption) (*AccountResponse, error)
+	GetAccountByID(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*AccountResponse, error)
+	AddAccount(ctx context.Context, in *AddAccountRequest, opts ...grpc.CallOption) (*AccountResponse, error)
+	UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*AccountResponse, error)
 	//  rpc DeleteAccount(DeleteAccountRequest) returns (AccountRes);
 	CheckPassword(ctx context.Context, in *CheckPasswordRequest, opts ...grpc.CallOption) (*CheckPasswordRes, error)
 }
@@ -39,8 +39,8 @@ func NewAccountServiceClient(cc grpc.ClientConnInterface) AccountServiceClient {
 	return &accountServiceClient{cc}
 }
 
-func (c *accountServiceClient) GetAccountList(ctx context.Context, in *AccountPagingRequest, opts ...grpc.CallOption) (*AccountListRes, error) {
-	out := new(AccountListRes)
+func (c *accountServiceClient) GetAccountList(ctx context.Context, in *AccountPagingRequest, opts ...grpc.CallOption) (*AccountListResponse, error) {
+	out := new(AccountListResponse)
 	err := c.cc.Invoke(ctx, "/account.AccountService/GetAccountList", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -48,8 +48,8 @@ func (c *accountServiceClient) GetAccountList(ctx context.Context, in *AccountPa
 	return out, nil
 }
 
-func (c *accountServiceClient) GetAccountByMobile(ctx context.Context, in *MobileRequest, opts ...grpc.CallOption) (*AccountRes, error) {
-	out := new(AccountRes)
+func (c *accountServiceClient) GetAccountByMobile(ctx context.Context, in *MobileRequest, opts ...grpc.CallOption) (*AccountResponse, error) {
+	out := new(AccountResponse)
 	err := c.cc.Invoke(ctx, "/account.AccountService/GetAccountByMobile", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -57,8 +57,8 @@ func (c *accountServiceClient) GetAccountByMobile(ctx context.Context, in *Mobil
 	return out, nil
 }
 
-func (c *accountServiceClient) GetAccountByID(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*AccountRes, error) {
-	out := new(AccountRes)
+func (c *accountServiceClient) GetAccountByID(ctx context.Context, in *IDRequest, opts ...grpc.CallOption) (*AccountResponse, error) {
+	out := new(AccountResponse)
 	err := c.cc.Invoke(ctx, "/account.AccountService/GetAccountByID", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -66,8 +66,8 @@ func (c *accountServiceClient) GetAccountByID(ctx context.Context, in *IDRequest
 	return out, nil
 }
 
-func (c *accountServiceClient) AddAccount(ctx context.Context, in *AddAccountRequest, opts ...grpc.CallOption) (*AccountRes, error) {
-	out := new(AccountRes)
+func (c *accountServiceClient) AddAccount(ctx context.Context, in *AddAccountRequest, opts ...grpc.CallOption) (*AccountResponse, error) {
+	out := new(AccountResponse)
 	err := c.cc.Invoke(ctx, "/account.AccountService/AddAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -75,8 +75,8 @@ func (c *accountServiceClient) AddAccount(ctx context.Context, in *AddAccountReq
 	return out, nil
 }
 
-func (c *accountServiceClient) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*AccountRes, error) {
-	out := new(AccountRes)
+func (c *accountServiceClient) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*AccountResponse, error) {
+	out := new(AccountResponse)
 	err := c.cc.Invoke(ctx, "/account.AccountService/UpdateAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,11 +97,11 @@ func (c *accountServiceClient) CheckPassword(ctx context.Context, in *CheckPassw
 // All implementations must embed UnimplementedAccountServiceServer
 // for forward compatibility
 type AccountServiceServer interface {
-	GetAccountList(context.Context, *AccountPagingRequest) (*AccountListRes, error)
-	GetAccountByMobile(context.Context, *MobileRequest) (*AccountRes, error)
-	GetAccountByID(context.Context, *IDRequest) (*AccountRes, error)
-	AddAccount(context.Context, *AddAccountRequest) (*AccountRes, error)
-	UpdateAccount(context.Context, *UpdateAccountRequest) (*AccountRes, error)
+	GetAccountList(context.Context, *AccountPagingRequest) (*AccountListResponse, error)
+	GetAccountByMobile(context.Context, *MobileRequest) (*AccountResponse, error)
+	GetAccountByID(context.Context, *IDRequest) (*AccountResponse, error)
+	AddAccount(context.Context, *AddAccountRequest) (*AccountResponse, error)
+	UpdateAccount(context.Context, *UpdateAccountRequest) (*AccountResponse, error)
 	//  rpc DeleteAccount(DeleteAccountRequest) returns (AccountRes);
 	CheckPassword(context.Context, *CheckPasswordRequest) (*CheckPasswordRes, error)
 	mustEmbedUnimplementedAccountServiceServer()
@@ -111,19 +111,19 @@ type AccountServiceServer interface {
 type UnimplementedAccountServiceServer struct {
 }
 
-func (UnimplementedAccountServiceServer) GetAccountList(context.Context, *AccountPagingRequest) (*AccountListRes, error) {
+func (UnimplementedAccountServiceServer) GetAccountList(context.Context, *AccountPagingRequest) (*AccountListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountList not implemented")
 }
-func (UnimplementedAccountServiceServer) GetAccountByMobile(context.Context, *MobileRequest) (*AccountRes, error) {
+func (UnimplementedAccountServiceServer) GetAccountByMobile(context.Context, *MobileRequest) (*AccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountByMobile not implemented")
 }
-func (UnimplementedAccountServiceServer) GetAccountByID(context.Context, *IDRequest) (*AccountRes, error) {
+func (UnimplementedAccountServiceServer) GetAccountByID(context.Context, *IDRequest) (*AccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountByID not implemented")
 }
-func (UnimplementedAccountServiceServer) AddAccount(context.Context, *AddAccountRequest) (*AccountRes, error) {
+func (UnimplementedAccountServiceServer) AddAccount(context.Context, *AddAccountRequest) (*AccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddAccount not implemented")
 }
-func (UnimplementedAccountServiceServer) UpdateAccount(context.Context, *UpdateAccountRequest) (*AccountRes, error) {
+func (UnimplementedAccountServiceServer) UpdateAccount(context.Context, *UpdateAccountRequest) (*AccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccount not implemented")
 }
 func (UnimplementedAccountServiceServer) CheckPassword(context.Context, *CheckPasswordRequest) (*CheckPasswordRes, error) {

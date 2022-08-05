@@ -5,64 +5,106 @@ option go_package = "./service/account;pb";
 
 
 service AccountService {
-  rpc GetAccountList(AccountPagingRequest) returns (AccountListRes);
-  rpc GetAccountByMobile(MobileRequest) returns (AccountRes);
-  rpc GetAccountByID(IDRequest) returns (AccountRes);
+  rpc GetAccountList(AccountPagingRequest) returns (AccountListResponse);
+  rpc GetAccountByMobile(MobileRequest) returns (AccountResponse);
+  rpc GetAccountByID(IDRequest) returns (AccountResponse);
 
-  rpc AddAccount(AddAccountRequest) returns (AccountRes);
-  rpc UpdateAccount(UpdateAccountRequest) returns (AccountRes);
+  rpc AddAccount(AddAccountRequest) returns (AccountResponse);
+  rpc UpdateAccount(UpdateAccountRequest) returns (AccountResponse);
 //  rpc DeleteAccount(DeleteAccountRequest) returns (AccountRes);
   rpc CheckPassword(CheckPasswordRequest) returns (CheckPasswordRes);
 }
 
-message AccountRes{
+message AccountResponse {
+  // @inject_tag: json:"id""
   int32 id = 1;
+
+  // @inject_tag: json:"mobile"
   string mobile = 2;
+
+  // @inject_tag: json:"password" swaggerignore:"true"
   string password = 3;
+
+  // @inject_tag: json:"nickname"
   string nickname = 4;
+
+  // @inject_tag: json:"gender"
   string gender = 5;
+
+  // @inject_tag: json:"role"
   uint32 role = 6;
 }
 
 message AccountPagingRequest {
+  // @inject_tag: json:"page"
   uint32 pageNo = 1;
+
+  // @inject_tag: json:"pageSize"
   uint32 pageSize = 2;
 }
 
-message AccountListRes {
+message AccountListResponse {
+
+  // @inject_tag: json:"total"
   int32 total = 1;
-  repeated AccountRes accountList = 2;
+
+  // @inject_tag: json:"list"
+  repeated AccountResponse accountList = 2;
 }
 
 message MobileRequest {
+  // @inject_tag: json:"mobile"
   string mobile = 1;
 }
 
 message IDRequest {
+  // @inject_tag: json:"id"
   int32 id = 1;
 }
 
 message AddAccountRequest {
+  // @inject_tag: json:"mobile"
   string mobile = 1;
+
+  // @inject_tag: json:"password"
   string password = 2;
+
+  // @inject_tag: json:"nickname"
   string nickname = 3;
+
+  // @inject_tag: json:"gender"
   string gender = 4;
 }
 
 message UpdateAccountRequest {
+  // @inject_tag: json:"id"
   uint32 id = 1;
+
+  // @inject_tag: json:"mobile"
   string mobile = 2;
+
+  // @inject_tag: json:"password"
   string password = 3;
+
+  // @inject_tag: json:"nickname"
   string nickname = 4;
+
+  // @inject_tag: json:"gender"
   string gender = 5;
 }
 
 message CheckPasswordRequest {
+  // @inject_tag: json:"password"
   string password = 1;
+
+  // @inject_tag: json:"hashPassword"
   string hashPassword = 2;
+
+  // @inject_tag: json:"id"
   string accountId = 3;
 }
 
 message CheckPasswordRes {
+  // @inject_tag: json:"result"
   bool result = 1;
 }

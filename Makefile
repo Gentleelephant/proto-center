@@ -7,8 +7,9 @@ help:
 
 build:
 	@buf generate
+	@sh ./build.sh
 push:
 	@cd ./proto/service/account && buf push
 	@cd ./proto/service/product && buf push
 tag:
-	protoc-go-inject-tag -input="*.pb.go"
+	@sh ./build.sh

@@ -24,34 +24,34 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProductServiceClient interface {
 	// 产品
-	ProductList(ctx context.Context, in *ProductConditionReq, opts ...grpc.CallOption) (*ProductRes, error)
-	BatchGetProduct(ctx context.Context, in *BatchProductIdReq, opts ...grpc.CallOption) (*ProductRes, error)
-	CreateProduct(ctx context.Context, in *CreateProductItem, opts ...grpc.CallOption) (*ProductItemRes, error)
+	ProductList(ctx context.Context, in *ProductConditionRequest, opts ...grpc.CallOption) (*ProductResponse, error)
+	BatchGetProduct(ctx context.Context, in *BatchProductIdRequest, opts ...grpc.CallOption) (*ProductResponse, error)
+	CreateProduct(ctx context.Context, in *CreateProductItem, opts ...grpc.CallOption) (*ProductItemResponse, error)
 	DeleteProduct(ctx context.Context, in *DeleteProductItem, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateProduct(ctx context.Context, in *CreateProductItem, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	GetProductDetail(ctx context.Context, in *ProductItemReq, opts ...grpc.CallOption) (*ProductItemRes, error)
+	GetProductDetail(ctx context.Context, in *ProductItemRequest, opts ...grpc.CallOption) (*ProductItemResponse, error)
 	// 产品分类
-	GetAllCategoryList(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*CategoriesRes, error)
-	GetSubCategory(ctx context.Context, in *CategoriesReq, opts ...grpc.CallOption) (*SubCategoriesRes, error)
-	CreateCategory(ctx context.Context, in *CategoryItemReq, opts ...grpc.CallOption) (*CategoryItemRes, error)
-	DeleteCategory(ctx context.Context, in *CategoryItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpdateCategory(ctx context.Context, in *CategoryItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetAllCategoryList(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*CategoriesResponse, error)
+	GetSubCategory(ctx context.Context, in *CategoriesRequest, opts ...grpc.CallOption) (*SubCategoriesResponse, error)
+	CreateCategory(ctx context.Context, in *CategoryItemRequest, opts ...grpc.CallOption) (*CategoryItemRes, error)
+	DeleteCategory(ctx context.Context, in *CategoryItemRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateCategory(ctx context.Context, in *CategoryItemRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// 品牌相关
-	BrandList(ctx context.Context, in *BrandPagingReq, opts ...grpc.CallOption) (*BrandRes, error)
-	CreateBrand(ctx context.Context, in *BrandItemReq, opts ...grpc.CallOption) (*BrandItemRes, error)
-	DeleteBrand(ctx context.Context, in *BrandItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpdateBrand(ctx context.Context, in *BrandItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	BrandList(ctx context.Context, in *BrandPagingRequest, opts ...grpc.CallOption) (*BrandResponse, error)
+	CreateBrand(ctx context.Context, in *BrandItemRequest, opts ...grpc.CallOption) (*BrandItemResponse, error)
+	DeleteBrand(ctx context.Context, in *BrandItemRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateBrand(ctx context.Context, in *BrandItemRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// 广告相关
-	AdvertiseList(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*AdvertisingRes, error)
-	CreateAdvertise(ctx context.Context, in *AdvertiseReq, opts ...grpc.CallOption) (*AdvertiseItemRes, error)
-	DeleteAdvertise(ctx context.Context, in *AdvertiseReq, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpdateAdvertise(ctx context.Context, in *AdvertiseReq, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AdvertiseList(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*AdvertisingResponse, error)
+	CreateAdvertise(ctx context.Context, in *AdvertiseRequest, opts ...grpc.CallOption) (*AdvertiseItemResponse, error)
+	DeleteAdvertise(ctx context.Context, in *AdvertiseRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateAdvertise(ctx context.Context, in *AdvertiseRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// 品牌分类中间表
 	CategoryBrandList(ctx context.Context, in *PagingReq, opts ...grpc.CallOption) (*CategoryBrandListRes, error)
-	GetCategoryBrandList(ctx context.Context, in *CategoryItemReq, opts ...grpc.CallOption) (*BrandItemRes, error)
-	CreateCategoryBrand(ctx context.Context, in *CategoryBrandItemReq, opts ...grpc.CallOption) (*CategoryBrandRes, error)
-	DeleteCategoryBrand(ctx context.Context, in *CategoryBrandItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpdateCategoryBrand(ctx context.Context, in *CategoryBrandItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetCategoryBrandList(ctx context.Context, in *CategoryItemRequest, opts ...grpc.CallOption) (*BrandItemResponse, error)
+	CreateCategoryBrand(ctx context.Context, in *CategoryBrandItemRequest, opts ...grpc.CallOption) (*CategoryBrandResponse, error)
+	DeleteCategoryBrand(ctx context.Context, in *CategoryBrandItemRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateCategoryBrand(ctx context.Context, in *CategoryBrandItemRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type productServiceClient struct {
@@ -62,8 +62,8 @@ func NewProductServiceClient(cc grpc.ClientConnInterface) ProductServiceClient {
 	return &productServiceClient{cc}
 }
 
-func (c *productServiceClient) ProductList(ctx context.Context, in *ProductConditionReq, opts ...grpc.CallOption) (*ProductRes, error) {
-	out := new(ProductRes)
+func (c *productServiceClient) ProductList(ctx context.Context, in *ProductConditionRequest, opts ...grpc.CallOption) (*ProductResponse, error) {
+	out := new(ProductResponse)
 	err := c.cc.Invoke(ctx, "/product.ProductService/ProductList", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -71,8 +71,8 @@ func (c *productServiceClient) ProductList(ctx context.Context, in *ProductCondi
 	return out, nil
 }
 
-func (c *productServiceClient) BatchGetProduct(ctx context.Context, in *BatchProductIdReq, opts ...grpc.CallOption) (*ProductRes, error) {
-	out := new(ProductRes)
+func (c *productServiceClient) BatchGetProduct(ctx context.Context, in *BatchProductIdRequest, opts ...grpc.CallOption) (*ProductResponse, error) {
+	out := new(ProductResponse)
 	err := c.cc.Invoke(ctx, "/product.ProductService/BatchGetProduct", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -80,8 +80,8 @@ func (c *productServiceClient) BatchGetProduct(ctx context.Context, in *BatchPro
 	return out, nil
 }
 
-func (c *productServiceClient) CreateProduct(ctx context.Context, in *CreateProductItem, opts ...grpc.CallOption) (*ProductItemRes, error) {
-	out := new(ProductItemRes)
+func (c *productServiceClient) CreateProduct(ctx context.Context, in *CreateProductItem, opts ...grpc.CallOption) (*ProductItemResponse, error) {
+	out := new(ProductItemResponse)
 	err := c.cc.Invoke(ctx, "/product.ProductService/CreateProduct", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -107,8 +107,8 @@ func (c *productServiceClient) UpdateProduct(ctx context.Context, in *CreateProd
 	return out, nil
 }
 
-func (c *productServiceClient) GetProductDetail(ctx context.Context, in *ProductItemReq, opts ...grpc.CallOption) (*ProductItemRes, error) {
-	out := new(ProductItemRes)
+func (c *productServiceClient) GetProductDetail(ctx context.Context, in *ProductItemRequest, opts ...grpc.CallOption) (*ProductItemResponse, error) {
+	out := new(ProductItemResponse)
 	err := c.cc.Invoke(ctx, "/product.ProductService/GetProductDetail", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -116,8 +116,8 @@ func (c *productServiceClient) GetProductDetail(ctx context.Context, in *Product
 	return out, nil
 }
 
-func (c *productServiceClient) GetAllCategoryList(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*CategoriesRes, error) {
-	out := new(CategoriesRes)
+func (c *productServiceClient) GetAllCategoryList(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*CategoriesResponse, error) {
+	out := new(CategoriesResponse)
 	err := c.cc.Invoke(ctx, "/product.ProductService/GetAllCategoryList", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -125,8 +125,8 @@ func (c *productServiceClient) GetAllCategoryList(ctx context.Context, in *empty
 	return out, nil
 }
 
-func (c *productServiceClient) GetSubCategory(ctx context.Context, in *CategoriesReq, opts ...grpc.CallOption) (*SubCategoriesRes, error) {
-	out := new(SubCategoriesRes)
+func (c *productServiceClient) GetSubCategory(ctx context.Context, in *CategoriesRequest, opts ...grpc.CallOption) (*SubCategoriesResponse, error) {
+	out := new(SubCategoriesResponse)
 	err := c.cc.Invoke(ctx, "/product.ProductService/GetSubCategory", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -134,7 +134,7 @@ func (c *productServiceClient) GetSubCategory(ctx context.Context, in *Categorie
 	return out, nil
 }
 
-func (c *productServiceClient) CreateCategory(ctx context.Context, in *CategoryItemReq, opts ...grpc.CallOption) (*CategoryItemRes, error) {
+func (c *productServiceClient) CreateCategory(ctx context.Context, in *CategoryItemRequest, opts ...grpc.CallOption) (*CategoryItemRes, error) {
 	out := new(CategoryItemRes)
 	err := c.cc.Invoke(ctx, "/product.ProductService/CreateCategory", in, out, opts...)
 	if err != nil {
@@ -143,7 +143,7 @@ func (c *productServiceClient) CreateCategory(ctx context.Context, in *CategoryI
 	return out, nil
 }
 
-func (c *productServiceClient) DeleteCategory(ctx context.Context, in *CategoryItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *productServiceClient) DeleteCategory(ctx context.Context, in *CategoryItemRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/product.ProductService/DeleteCategory", in, out, opts...)
 	if err != nil {
@@ -152,7 +152,7 @@ func (c *productServiceClient) DeleteCategory(ctx context.Context, in *CategoryI
 	return out, nil
 }
 
-func (c *productServiceClient) UpdateCategory(ctx context.Context, in *CategoryItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *productServiceClient) UpdateCategory(ctx context.Context, in *CategoryItemRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/product.ProductService/UpdateCategory", in, out, opts...)
 	if err != nil {
@@ -161,8 +161,8 @@ func (c *productServiceClient) UpdateCategory(ctx context.Context, in *CategoryI
 	return out, nil
 }
 
-func (c *productServiceClient) BrandList(ctx context.Context, in *BrandPagingReq, opts ...grpc.CallOption) (*BrandRes, error) {
-	out := new(BrandRes)
+func (c *productServiceClient) BrandList(ctx context.Context, in *BrandPagingRequest, opts ...grpc.CallOption) (*BrandResponse, error) {
+	out := new(BrandResponse)
 	err := c.cc.Invoke(ctx, "/product.ProductService/BrandList", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -170,8 +170,8 @@ func (c *productServiceClient) BrandList(ctx context.Context, in *BrandPagingReq
 	return out, nil
 }
 
-func (c *productServiceClient) CreateBrand(ctx context.Context, in *BrandItemReq, opts ...grpc.CallOption) (*BrandItemRes, error) {
-	out := new(BrandItemRes)
+func (c *productServiceClient) CreateBrand(ctx context.Context, in *BrandItemRequest, opts ...grpc.CallOption) (*BrandItemResponse, error) {
+	out := new(BrandItemResponse)
 	err := c.cc.Invoke(ctx, "/product.ProductService/CreateBrand", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -179,7 +179,7 @@ func (c *productServiceClient) CreateBrand(ctx context.Context, in *BrandItemReq
 	return out, nil
 }
 
-func (c *productServiceClient) DeleteBrand(ctx context.Context, in *BrandItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *productServiceClient) DeleteBrand(ctx context.Context, in *BrandItemRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/product.ProductService/DeleteBrand", in, out, opts...)
 	if err != nil {
@@ -188,7 +188,7 @@ func (c *productServiceClient) DeleteBrand(ctx context.Context, in *BrandItemReq
 	return out, nil
 }
 
-func (c *productServiceClient) UpdateBrand(ctx context.Context, in *BrandItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *productServiceClient) UpdateBrand(ctx context.Context, in *BrandItemRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/product.ProductService/UpdateBrand", in, out, opts...)
 	if err != nil {
@@ -197,8 +197,8 @@ func (c *productServiceClient) UpdateBrand(ctx context.Context, in *BrandItemReq
 	return out, nil
 }
 
-func (c *productServiceClient) AdvertiseList(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*AdvertisingRes, error) {
-	out := new(AdvertisingRes)
+func (c *productServiceClient) AdvertiseList(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*AdvertisingResponse, error) {
+	out := new(AdvertisingResponse)
 	err := c.cc.Invoke(ctx, "/product.ProductService/AdvertiseList", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -206,8 +206,8 @@ func (c *productServiceClient) AdvertiseList(ctx context.Context, in *emptypb.Em
 	return out, nil
 }
 
-func (c *productServiceClient) CreateAdvertise(ctx context.Context, in *AdvertiseReq, opts ...grpc.CallOption) (*AdvertiseItemRes, error) {
-	out := new(AdvertiseItemRes)
+func (c *productServiceClient) CreateAdvertise(ctx context.Context, in *AdvertiseRequest, opts ...grpc.CallOption) (*AdvertiseItemResponse, error) {
+	out := new(AdvertiseItemResponse)
 	err := c.cc.Invoke(ctx, "/product.ProductService/CreateAdvertise", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -215,7 +215,7 @@ func (c *productServiceClient) CreateAdvertise(ctx context.Context, in *Advertis
 	return out, nil
 }
 
-func (c *productServiceClient) DeleteAdvertise(ctx context.Context, in *AdvertiseReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *productServiceClient) DeleteAdvertise(ctx context.Context, in *AdvertiseRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/product.ProductService/DeleteAdvertise", in, out, opts...)
 	if err != nil {
@@ -224,7 +224,7 @@ func (c *productServiceClient) DeleteAdvertise(ctx context.Context, in *Advertis
 	return out, nil
 }
 
-func (c *productServiceClient) UpdateAdvertise(ctx context.Context, in *AdvertiseReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *productServiceClient) UpdateAdvertise(ctx context.Context, in *AdvertiseRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/product.ProductService/UpdateAdvertise", in, out, opts...)
 	if err != nil {
@@ -242,8 +242,8 @@ func (c *productServiceClient) CategoryBrandList(ctx context.Context, in *Paging
 	return out, nil
 }
 
-func (c *productServiceClient) GetCategoryBrandList(ctx context.Context, in *CategoryItemReq, opts ...grpc.CallOption) (*BrandItemRes, error) {
-	out := new(BrandItemRes)
+func (c *productServiceClient) GetCategoryBrandList(ctx context.Context, in *CategoryItemRequest, opts ...grpc.CallOption) (*BrandItemResponse, error) {
+	out := new(BrandItemResponse)
 	err := c.cc.Invoke(ctx, "/product.ProductService/GetCategoryBrandList", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -251,8 +251,8 @@ func (c *productServiceClient) GetCategoryBrandList(ctx context.Context, in *Cat
 	return out, nil
 }
 
-func (c *productServiceClient) CreateCategoryBrand(ctx context.Context, in *CategoryBrandItemReq, opts ...grpc.CallOption) (*CategoryBrandRes, error) {
-	out := new(CategoryBrandRes)
+func (c *productServiceClient) CreateCategoryBrand(ctx context.Context, in *CategoryBrandItemRequest, opts ...grpc.CallOption) (*CategoryBrandResponse, error) {
+	out := new(CategoryBrandResponse)
 	err := c.cc.Invoke(ctx, "/product.ProductService/CreateCategoryBrand", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -260,7 +260,7 @@ func (c *productServiceClient) CreateCategoryBrand(ctx context.Context, in *Cate
 	return out, nil
 }
 
-func (c *productServiceClient) DeleteCategoryBrand(ctx context.Context, in *CategoryBrandItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *productServiceClient) DeleteCategoryBrand(ctx context.Context, in *CategoryBrandItemRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/product.ProductService/DeleteCategoryBrand", in, out, opts...)
 	if err != nil {
@@ -269,7 +269,7 @@ func (c *productServiceClient) DeleteCategoryBrand(ctx context.Context, in *Cate
 	return out, nil
 }
 
-func (c *productServiceClient) UpdateCategoryBrand(ctx context.Context, in *CategoryBrandItemReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *productServiceClient) UpdateCategoryBrand(ctx context.Context, in *CategoryBrandItemRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/product.ProductService/UpdateCategoryBrand", in, out, opts...)
 	if err != nil {
@@ -283,34 +283,34 @@ func (c *productServiceClient) UpdateCategoryBrand(ctx context.Context, in *Cate
 // for forward compatibility
 type ProductServiceServer interface {
 	// 产品
-	ProductList(context.Context, *ProductConditionReq) (*ProductRes, error)
-	BatchGetProduct(context.Context, *BatchProductIdReq) (*ProductRes, error)
-	CreateProduct(context.Context, *CreateProductItem) (*ProductItemRes, error)
+	ProductList(context.Context, *ProductConditionRequest) (*ProductResponse, error)
+	BatchGetProduct(context.Context, *BatchProductIdRequest) (*ProductResponse, error)
+	CreateProduct(context.Context, *CreateProductItem) (*ProductItemResponse, error)
 	DeleteProduct(context.Context, *DeleteProductItem) (*emptypb.Empty, error)
 	UpdateProduct(context.Context, *CreateProductItem) (*emptypb.Empty, error)
-	GetProductDetail(context.Context, *ProductItemReq) (*ProductItemRes, error)
+	GetProductDetail(context.Context, *ProductItemRequest) (*ProductItemResponse, error)
 	// 产品分类
-	GetAllCategoryList(context.Context, *emptypb.Empty) (*CategoriesRes, error)
-	GetSubCategory(context.Context, *CategoriesReq) (*SubCategoriesRes, error)
-	CreateCategory(context.Context, *CategoryItemReq) (*CategoryItemRes, error)
-	DeleteCategory(context.Context, *CategoryItemReq) (*emptypb.Empty, error)
-	UpdateCategory(context.Context, *CategoryItemReq) (*emptypb.Empty, error)
+	GetAllCategoryList(context.Context, *emptypb.Empty) (*CategoriesResponse, error)
+	GetSubCategory(context.Context, *CategoriesRequest) (*SubCategoriesResponse, error)
+	CreateCategory(context.Context, *CategoryItemRequest) (*CategoryItemRes, error)
+	DeleteCategory(context.Context, *CategoryItemRequest) (*emptypb.Empty, error)
+	UpdateCategory(context.Context, *CategoryItemRequest) (*emptypb.Empty, error)
 	// 品牌相关
-	BrandList(context.Context, *BrandPagingReq) (*BrandRes, error)
-	CreateBrand(context.Context, *BrandItemReq) (*BrandItemRes, error)
-	DeleteBrand(context.Context, *BrandItemReq) (*emptypb.Empty, error)
-	UpdateBrand(context.Context, *BrandItemReq) (*emptypb.Empty, error)
+	BrandList(context.Context, *BrandPagingRequest) (*BrandResponse, error)
+	CreateBrand(context.Context, *BrandItemRequest) (*BrandItemResponse, error)
+	DeleteBrand(context.Context, *BrandItemRequest) (*emptypb.Empty, error)
+	UpdateBrand(context.Context, *BrandItemRequest) (*emptypb.Empty, error)
 	// 广告相关
-	AdvertiseList(context.Context, *emptypb.Empty) (*AdvertisingRes, error)
-	CreateAdvertise(context.Context, *AdvertiseReq) (*AdvertiseItemRes, error)
-	DeleteAdvertise(context.Context, *AdvertiseReq) (*emptypb.Empty, error)
-	UpdateAdvertise(context.Context, *AdvertiseReq) (*emptypb.Empty, error)
+	AdvertiseList(context.Context, *emptypb.Empty) (*AdvertisingResponse, error)
+	CreateAdvertise(context.Context, *AdvertiseRequest) (*AdvertiseItemResponse, error)
+	DeleteAdvertise(context.Context, *AdvertiseRequest) (*emptypb.Empty, error)
+	UpdateAdvertise(context.Context, *AdvertiseRequest) (*emptypb.Empty, error)
 	// 品牌分类中间表
 	CategoryBrandList(context.Context, *PagingReq) (*CategoryBrandListRes, error)
-	GetCategoryBrandList(context.Context, *CategoryItemReq) (*BrandItemRes, error)
-	CreateCategoryBrand(context.Context, *CategoryBrandItemReq) (*CategoryBrandRes, error)
-	DeleteCategoryBrand(context.Context, *CategoryBrandItemReq) (*emptypb.Empty, error)
-	UpdateCategoryBrand(context.Context, *CategoryBrandItemReq) (*emptypb.Empty, error)
+	GetCategoryBrandList(context.Context, *CategoryItemRequest) (*BrandItemResponse, error)
+	CreateCategoryBrand(context.Context, *CategoryBrandItemRequest) (*CategoryBrandResponse, error)
+	DeleteCategoryBrand(context.Context, *CategoryBrandItemRequest) (*emptypb.Empty, error)
+	UpdateCategoryBrand(context.Context, *CategoryBrandItemRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedProductServiceServer()
 }
 
@@ -318,13 +318,13 @@ type ProductServiceServer interface {
 type UnimplementedProductServiceServer struct {
 }
 
-func (UnimplementedProductServiceServer) ProductList(context.Context, *ProductConditionReq) (*ProductRes, error) {
+func (UnimplementedProductServiceServer) ProductList(context.Context, *ProductConditionRequest) (*ProductResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductList not implemented")
 }
-func (UnimplementedProductServiceServer) BatchGetProduct(context.Context, *BatchProductIdReq) (*ProductRes, error) {
+func (UnimplementedProductServiceServer) BatchGetProduct(context.Context, *BatchProductIdRequest) (*ProductResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BatchGetProduct not implemented")
 }
-func (UnimplementedProductServiceServer) CreateProduct(context.Context, *CreateProductItem) (*ProductItemRes, error) {
+func (UnimplementedProductServiceServer) CreateProduct(context.Context, *CreateProductItem) (*ProductItemResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProduct not implemented")
 }
 func (UnimplementedProductServiceServer) DeleteProduct(context.Context, *DeleteProductItem) (*emptypb.Empty, error) {
@@ -333,61 +333,61 @@ func (UnimplementedProductServiceServer) DeleteProduct(context.Context, *DeleteP
 func (UnimplementedProductServiceServer) UpdateProduct(context.Context, *CreateProductItem) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProduct not implemented")
 }
-func (UnimplementedProductServiceServer) GetProductDetail(context.Context, *ProductItemReq) (*ProductItemRes, error) {
+func (UnimplementedProductServiceServer) GetProductDetail(context.Context, *ProductItemRequest) (*ProductItemResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProductDetail not implemented")
 }
-func (UnimplementedProductServiceServer) GetAllCategoryList(context.Context, *emptypb.Empty) (*CategoriesRes, error) {
+func (UnimplementedProductServiceServer) GetAllCategoryList(context.Context, *emptypb.Empty) (*CategoriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllCategoryList not implemented")
 }
-func (UnimplementedProductServiceServer) GetSubCategory(context.Context, *CategoriesReq) (*SubCategoriesRes, error) {
+func (UnimplementedProductServiceServer) GetSubCategory(context.Context, *CategoriesRequest) (*SubCategoriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSubCategory not implemented")
 }
-func (UnimplementedProductServiceServer) CreateCategory(context.Context, *CategoryItemReq) (*CategoryItemRes, error) {
+func (UnimplementedProductServiceServer) CreateCategory(context.Context, *CategoryItemRequest) (*CategoryItemRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCategory not implemented")
 }
-func (UnimplementedProductServiceServer) DeleteCategory(context.Context, *CategoryItemReq) (*emptypb.Empty, error) {
+func (UnimplementedProductServiceServer) DeleteCategory(context.Context, *CategoryItemRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCategory not implemented")
 }
-func (UnimplementedProductServiceServer) UpdateCategory(context.Context, *CategoryItemReq) (*emptypb.Empty, error) {
+func (UnimplementedProductServiceServer) UpdateCategory(context.Context, *CategoryItemRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCategory not implemented")
 }
-func (UnimplementedProductServiceServer) BrandList(context.Context, *BrandPagingReq) (*BrandRes, error) {
+func (UnimplementedProductServiceServer) BrandList(context.Context, *BrandPagingRequest) (*BrandResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BrandList not implemented")
 }
-func (UnimplementedProductServiceServer) CreateBrand(context.Context, *BrandItemReq) (*BrandItemRes, error) {
+func (UnimplementedProductServiceServer) CreateBrand(context.Context, *BrandItemRequest) (*BrandItemResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateBrand not implemented")
 }
-func (UnimplementedProductServiceServer) DeleteBrand(context.Context, *BrandItemReq) (*emptypb.Empty, error) {
+func (UnimplementedProductServiceServer) DeleteBrand(context.Context, *BrandItemRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteBrand not implemented")
 }
-func (UnimplementedProductServiceServer) UpdateBrand(context.Context, *BrandItemReq) (*emptypb.Empty, error) {
+func (UnimplementedProductServiceServer) UpdateBrand(context.Context, *BrandItemRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBrand not implemented")
 }
-func (UnimplementedProductServiceServer) AdvertiseList(context.Context, *emptypb.Empty) (*AdvertisingRes, error) {
+func (UnimplementedProductServiceServer) AdvertiseList(context.Context, *emptypb.Empty) (*AdvertisingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AdvertiseList not implemented")
 }
-func (UnimplementedProductServiceServer) CreateAdvertise(context.Context, *AdvertiseReq) (*AdvertiseItemRes, error) {
+func (UnimplementedProductServiceServer) CreateAdvertise(context.Context, *AdvertiseRequest) (*AdvertiseItemResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAdvertise not implemented")
 }
-func (UnimplementedProductServiceServer) DeleteAdvertise(context.Context, *AdvertiseReq) (*emptypb.Empty, error) {
+func (UnimplementedProductServiceServer) DeleteAdvertise(context.Context, *AdvertiseRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAdvertise not implemented")
 }
-func (UnimplementedProductServiceServer) UpdateAdvertise(context.Context, *AdvertiseReq) (*emptypb.Empty, error) {
+func (UnimplementedProductServiceServer) UpdateAdvertise(context.Context, *AdvertiseRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAdvertise not implemented")
 }
 func (UnimplementedProductServiceServer) CategoryBrandList(context.Context, *PagingReq) (*CategoryBrandListRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CategoryBrandList not implemented")
 }
-func (UnimplementedProductServiceServer) GetCategoryBrandList(context.Context, *CategoryItemReq) (*BrandItemRes, error) {
+func (UnimplementedProductServiceServer) GetCategoryBrandList(context.Context, *CategoryItemRequest) (*BrandItemResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCategoryBrandList not implemented")
 }
-func (UnimplementedProductServiceServer) CreateCategoryBrand(context.Context, *CategoryBrandItemReq) (*CategoryBrandRes, error) {
+func (UnimplementedProductServiceServer) CreateCategoryBrand(context.Context, *CategoryBrandItemRequest) (*CategoryBrandResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCategoryBrand not implemented")
 }
-func (UnimplementedProductServiceServer) DeleteCategoryBrand(context.Context, *CategoryBrandItemReq) (*emptypb.Empty, error) {
+func (UnimplementedProductServiceServer) DeleteCategoryBrand(context.Context, *CategoryBrandItemRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCategoryBrand not implemented")
 }
-func (UnimplementedProductServiceServer) UpdateCategoryBrand(context.Context, *CategoryBrandItemReq) (*emptypb.Empty, error) {
+func (UnimplementedProductServiceServer) UpdateCategoryBrand(context.Context, *CategoryBrandItemRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCategoryBrand not implemented")
 }
 func (UnimplementedProductServiceServer) mustEmbedUnimplementedProductServiceServer() {}
@@ -404,7 +404,7 @@ func RegisterProductServiceServer(s grpc.ServiceRegistrar, srv ProductServiceSer
 }
 
 func _ProductService_ProductList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProductConditionReq)
+	in := new(ProductConditionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -416,13 +416,13 @@ func _ProductService_ProductList_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: "/product.ProductService/ProductList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).ProductList(ctx, req.(*ProductConditionReq))
+		return srv.(ProductServiceServer).ProductList(ctx, req.(*ProductConditionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProductService_BatchGetProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BatchProductIdReq)
+	in := new(BatchProductIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -434,7 +434,7 @@ func _ProductService_BatchGetProduct_Handler(srv interface{}, ctx context.Contex
 		FullMethod: "/product.ProductService/BatchGetProduct",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).BatchGetProduct(ctx, req.(*BatchProductIdReq))
+		return srv.(ProductServiceServer).BatchGetProduct(ctx, req.(*BatchProductIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -494,7 +494,7 @@ func _ProductService_UpdateProduct_Handler(srv interface{}, ctx context.Context,
 }
 
 func _ProductService_GetProductDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProductItemReq)
+	in := new(ProductItemRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -506,7 +506,7 @@ func _ProductService_GetProductDetail_Handler(srv interface{}, ctx context.Conte
 		FullMethod: "/product.ProductService/GetProductDetail",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).GetProductDetail(ctx, req.(*ProductItemReq))
+		return srv.(ProductServiceServer).GetProductDetail(ctx, req.(*ProductItemRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -530,7 +530,7 @@ func _ProductService_GetAllCategoryList_Handler(srv interface{}, ctx context.Con
 }
 
 func _ProductService_GetSubCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CategoriesReq)
+	in := new(CategoriesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -542,13 +542,13 @@ func _ProductService_GetSubCategory_Handler(srv interface{}, ctx context.Context
 		FullMethod: "/product.ProductService/GetSubCategory",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).GetSubCategory(ctx, req.(*CategoriesReq))
+		return srv.(ProductServiceServer).GetSubCategory(ctx, req.(*CategoriesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProductService_CreateCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CategoryItemReq)
+	in := new(CategoryItemRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -560,13 +560,13 @@ func _ProductService_CreateCategory_Handler(srv interface{}, ctx context.Context
 		FullMethod: "/product.ProductService/CreateCategory",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).CreateCategory(ctx, req.(*CategoryItemReq))
+		return srv.(ProductServiceServer).CreateCategory(ctx, req.(*CategoryItemRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProductService_DeleteCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CategoryItemReq)
+	in := new(CategoryItemRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -578,13 +578,13 @@ func _ProductService_DeleteCategory_Handler(srv interface{}, ctx context.Context
 		FullMethod: "/product.ProductService/DeleteCategory",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).DeleteCategory(ctx, req.(*CategoryItemReq))
+		return srv.(ProductServiceServer).DeleteCategory(ctx, req.(*CategoryItemRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProductService_UpdateCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CategoryItemReq)
+	in := new(CategoryItemRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -596,13 +596,13 @@ func _ProductService_UpdateCategory_Handler(srv interface{}, ctx context.Context
 		FullMethod: "/product.ProductService/UpdateCategory",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).UpdateCategory(ctx, req.(*CategoryItemReq))
+		return srv.(ProductServiceServer).UpdateCategory(ctx, req.(*CategoryItemRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProductService_BrandList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BrandPagingReq)
+	in := new(BrandPagingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -614,13 +614,13 @@ func _ProductService_BrandList_Handler(srv interface{}, ctx context.Context, dec
 		FullMethod: "/product.ProductService/BrandList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).BrandList(ctx, req.(*BrandPagingReq))
+		return srv.(ProductServiceServer).BrandList(ctx, req.(*BrandPagingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProductService_CreateBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BrandItemReq)
+	in := new(BrandItemRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -632,13 +632,13 @@ func _ProductService_CreateBrand_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: "/product.ProductService/CreateBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).CreateBrand(ctx, req.(*BrandItemReq))
+		return srv.(ProductServiceServer).CreateBrand(ctx, req.(*BrandItemRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProductService_DeleteBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BrandItemReq)
+	in := new(BrandItemRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -650,13 +650,13 @@ func _ProductService_DeleteBrand_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: "/product.ProductService/DeleteBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).DeleteBrand(ctx, req.(*BrandItemReq))
+		return srv.(ProductServiceServer).DeleteBrand(ctx, req.(*BrandItemRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProductService_UpdateBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BrandItemReq)
+	in := new(BrandItemRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -668,7 +668,7 @@ func _ProductService_UpdateBrand_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: "/product.ProductService/UpdateBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).UpdateBrand(ctx, req.(*BrandItemReq))
+		return srv.(ProductServiceServer).UpdateBrand(ctx, req.(*BrandItemRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -692,7 +692,7 @@ func _ProductService_AdvertiseList_Handler(srv interface{}, ctx context.Context,
 }
 
 func _ProductService_CreateAdvertise_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AdvertiseReq)
+	in := new(AdvertiseRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -704,13 +704,13 @@ func _ProductService_CreateAdvertise_Handler(srv interface{}, ctx context.Contex
 		FullMethod: "/product.ProductService/CreateAdvertise",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).CreateAdvertise(ctx, req.(*AdvertiseReq))
+		return srv.(ProductServiceServer).CreateAdvertise(ctx, req.(*AdvertiseRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProductService_DeleteAdvertise_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AdvertiseReq)
+	in := new(AdvertiseRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -722,13 +722,13 @@ func _ProductService_DeleteAdvertise_Handler(srv interface{}, ctx context.Contex
 		FullMethod: "/product.ProductService/DeleteAdvertise",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).DeleteAdvertise(ctx, req.(*AdvertiseReq))
+		return srv.(ProductServiceServer).DeleteAdvertise(ctx, req.(*AdvertiseRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProductService_UpdateAdvertise_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AdvertiseReq)
+	in := new(AdvertiseRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -740,7 +740,7 @@ func _ProductService_UpdateAdvertise_Handler(srv interface{}, ctx context.Contex
 		FullMethod: "/product.ProductService/UpdateAdvertise",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).UpdateAdvertise(ctx, req.(*AdvertiseReq))
+		return srv.(ProductServiceServer).UpdateAdvertise(ctx, req.(*AdvertiseRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -764,7 +764,7 @@ func _ProductService_CategoryBrandList_Handler(srv interface{}, ctx context.Cont
 }
 
 func _ProductService_GetCategoryBrandList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CategoryItemReq)
+	in := new(CategoryItemRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -776,13 +776,13 @@ func _ProductService_GetCategoryBrandList_Handler(srv interface{}, ctx context.C
 		FullMethod: "/product.ProductService/GetCategoryBrandList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).GetCategoryBrandList(ctx, req.(*CategoryItemReq))
+		return srv.(ProductServiceServer).GetCategoryBrandList(ctx, req.(*CategoryItemRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProductService_CreateCategoryBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CategoryBrandItemReq)
+	in := new(CategoryBrandItemRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -794,13 +794,13 @@ func _ProductService_CreateCategoryBrand_Handler(srv interface{}, ctx context.Co
 		FullMethod: "/product.ProductService/CreateCategoryBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).CreateCategoryBrand(ctx, req.(*CategoryBrandItemReq))
+		return srv.(ProductServiceServer).CreateCategoryBrand(ctx, req.(*CategoryBrandItemRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProductService_DeleteCategoryBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CategoryBrandItemReq)
+	in := new(CategoryBrandItemRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -812,13 +812,13 @@ func _ProductService_DeleteCategoryBrand_Handler(srv interface{}, ctx context.Co
 		FullMethod: "/product.ProductService/DeleteCategoryBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).DeleteCategoryBrand(ctx, req.(*CategoryBrandItemReq))
+		return srv.(ProductServiceServer).DeleteCategoryBrand(ctx, req.(*CategoryBrandItemRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProductService_UpdateCategoryBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CategoryBrandItemReq)
+	in := new(CategoryBrandItemRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -830,7 +830,7 @@ func _ProductService_UpdateCategoryBrand_Handler(srv interface{}, ctx context.Co
 		FullMethod: "/product.ProductService/UpdateCategoryBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).UpdateCategoryBrand(ctx, req.(*CategoryBrandItemReq))
+		return srv.(ProductServiceServer).UpdateCategoryBrand(ctx, req.(*CategoryBrandItemRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
