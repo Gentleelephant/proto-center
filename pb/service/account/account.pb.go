@@ -280,8 +280,8 @@ type IDRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: json:"id"
-	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	// @inject_tag: json:"id" form:"id"
+	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id" form:"id"`
 }
 
 func (x *IDRequest) Reset() {

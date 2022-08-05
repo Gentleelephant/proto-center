@@ -58,7 +58,7 @@ message MobileRequest {
 }
 
 message IDRequest {
-  // @inject_tag: json:"id"
+  // @inject_tag: json:"id" form:"id"
   int32 id = 1;
 }
 
