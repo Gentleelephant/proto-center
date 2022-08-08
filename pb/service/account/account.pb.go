@@ -25,7 +25,7 @@ type AccountResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: json:"id""
+	// @inject_tag: json:"id"
 	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
 	// @inject_tag: json:"mobile"
 	Mobile string `protobuf:"bytes,2,opt,name=mobile,proto3" json:"mobile"`
@@ -118,10 +118,10 @@ type AccountPagingRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: json:"page"
-	PageNo uint32 `protobuf:"varint,1,opt,name=pageNo,proto3" json:"page"`
-	// @inject_tag: json:"pageSize"
-	PageSize uint32 `protobuf:"varint,2,opt,name=pageSize,proto3" json:"pageSize"`
+	// @inject_tag: json:"pageNo" form:"pageNo"
+	PageNo uint32 `protobuf:"varint,1,opt,name=pageNo,proto3" json:"pageNo" form:"pageNo"`
+	// @inject_tag: json:"pageSize" form:"pageSize"
+	PageSize uint32 `protobuf:"varint,2,opt,name=pageSize,proto3" json:"pageSize" form:"pageSize"`
 }
 
 func (x *AccountPagingRequest) Reset() {
@@ -232,8 +232,8 @@ type MobileRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: json:"mobile"
-	Mobile string `protobuf:"bytes,1,opt,name=mobile,proto3" json:"mobile"`
+	// @inject_tag: json:"mobile" form:"mobile"
+	Mobile string `protobuf:"bytes,1,opt,name=mobile,proto3" json:"mobile" form:"mobile"`
 }
 
 func (x *MobileRequest) Reset() {
@@ -280,8 +280,8 @@ type IDRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: json:"id" form:"id"
-	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id" form:"id"`
+	// @inject_tag: json:"id" form:"id" uri:"id"
+	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id" form:"id" uri:"id"`
 }
 
 func (x *IDRequest) Reset() {
@@ -553,8 +553,8 @@ type CheckPasswordRes struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: json:"result"
-	Result bool `protobuf:"varint,1,opt,name=result,proto3" json:"result"`
+	// @inject_tag: json:"result" form:"result"
+	Result bool `protobuf:"varint,1,opt,name=result,proto3" json:"result" form:"result"`
 }
 
 func (x *CheckPasswordRes) Reset() {

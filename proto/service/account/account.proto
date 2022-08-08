@@ -16,7 +16,7 @@ service AccountService {
 }
 
 message AccountResponse {
-  // @inject_tag: json:"id""
+  // @inject_tag: json:"id"
   int32 id = 1;
 
   // @inject_tag: json:"mobile"
@@ -36,10 +36,10 @@ message AccountResponse {
 }
 
 message AccountPagingRequest {
-  // @inject_tag: json:"page"
+  // @inject_tag: json:"pageNo" form:"pageNo"
   uint32 pageNo = 1;
 
-  // @inject_tag: json:"pageSize"
+  // @inject_tag: json:"pageSize" form:"pageSize"
   uint32 pageSize = 2;
 }
 
@@ -53,12 +53,12 @@ message AccountListResponse {
 }
 
 message MobileRequest {
-  // @inject_tag: json:"mobile"
+  // @inject_tag: json:"mobile" form:"mobile"
   string mobile = 1;
 }
 
 message IDRequest {
-  // @inject_tag: json:"id" form:"id"
+  // @inject_tag: json:"id" form:"id" uri:"id"
   int32 id = 1;
 }
 
@@ -105,6 +105,6 @@ message CheckPasswordRequest {
 }
 
 message CheckPasswordRes {
-  // @inject_tag: json:"result"
+  // @inject_tag: json:"result" form:"result"
   bool result = 1;
 }
