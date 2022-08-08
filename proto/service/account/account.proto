@@ -15,6 +15,37 @@ service AccountService {
   rpc CheckPassword(CheckPasswordRequest) returns (CheckPasswordRes);
 }
 
+
+// ===== model =====
+message AccountModel {
+  // @inject_tag: json:"id" gorm:"primarykey"
+  string id = 1;
+  // @inject_tag: json:"mobile" gorm:"type:varchar(11);unique;not null;index:idx_mobile"
+  string mobile = 2;
+  // @inject_tag: json:"password" swaggerignore="true" gomr:"type:varchar(256);not null"
+  string password = 3;
+  // @inject_tag: json:"nickname" gorm:"type:varchar(64);not null"
+  string nickname = 4;
+  // @inject_tag: json:"genter" gorm:"type:varchar(6);default:male"
+  string gender = 5;
+  // @inject_tag: json:"salt" swaggerignore="true" gorm:"type:varchar(256);not null"
+  string salt = 6;
+  // @inject_tag: json:"role" gorm:"type:int;default:1;comment'1-普通用户 2-管理员'"
+  string role = 7;
+  // @inject_tag: json:"create_time" gorm:"type:bigint;autoCreateTime"
+  string create_at = 8;
+  // @inject_tag: json:"update_time" gorm:"type:bigint;autoUpdateTime"
+  string update_at = 9;
+// @inject_tag: json:"delete_time" gorm:"type:tinyint;default:1;comment'1-正常 2-禁用'"
+  string status = 10;
+}
+
+
+
+
+// ===== model =====
+
+
 message AccountResponse {
   // @inject_tag: json:"id"
   int32 id = 1;
